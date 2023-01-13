@@ -1,22 +1,23 @@
 server:
   port: 8092
 
-#spring:
-#  jpa:
-#    database-platform:
-#  application:
-#    name: UserService
-#  datasource:
-#    url:
-#    driver-class-name:
-#    username:
-#    password:
-
-
-
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.MySQLDialect
   application:
     name: UserService
+  datasource:
+    url: jdbc:mysql://localhost:3306/Microservice
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+
+
+
+
+
 
 eureka:
   client:
