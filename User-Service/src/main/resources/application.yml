@@ -1,0 +1,26 @@
+server:
+  port: 8092
+
+#spring:
+#  jpa:
+#    database-platform:
+#  application:
+#    name: UserService
+#  datasource:
+#    url:
+#    driver-class-name:
+#    username:
+#    password:
+
+
+
+spring:
+  application:
+    name: UserService
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://localhost:8761

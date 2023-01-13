@@ -1,0 +1,31 @@
+
+#spring.application.name=apiGateway
+#
+#server.port=8091
+#
+#eureka.client.register-with-eureka=true
+#eureka.client.fetch-registry=true
+#
+#
+##eureka.client.instance.hostname=192.168.1.72
+##eureka.client.instance.prefer-ip-address=true
+#
+#eureka.client.service-url.default-zone=http://localhost:8090/eureka
+
+
+
+
+
+spring:
+  application:
+    name: apiGateway
+server:
+  port: 8091
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://localhost:8761
+

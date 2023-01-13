@@ -1,0 +1,19 @@
+
+
+# By default eureka clients tries to connect to port 8761....
+#if issue setting port set euerka server port and port at service url to 8761
+server:
+  port: 8761
+
+
+spring:
+  application:
+    name: Eureka-Server
+
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+        default-zone: http://localhost:8761
