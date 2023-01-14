@@ -13,6 +13,8 @@ public class RolesService {
     RolesRepository rolesRepository;
 
     public void saveRole(Roles role){
+        rolesRepository.save(role);
+
 
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RolesController {
     @Autowired
     RolesRepository rolesRepository;
-    @PostMapping("/addRoles")
+    @PostMapping("/userservice/addRoles")
     public void saveRoles(@RequestBody Roles roles){
 
         rolesRepository.save(roles);

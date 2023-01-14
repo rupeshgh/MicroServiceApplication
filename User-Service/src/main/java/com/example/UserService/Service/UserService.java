@@ -7,6 +7,9 @@ import com.example.UserService.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UserService {
 
@@ -19,6 +22,7 @@ public class UserService {
 
 
     public User save(User user) {
+        System.out.println(user.getUserRoles());
         return userRepository.save(user);
 
 
@@ -30,5 +34,11 @@ public class UserService {
         Roles role=rolesRepository.getRolesByName(roleName);
 
         user.getUserRoles().add(role);
+    }
+
+    public List<String> getUsers() {
+        List<User>users=userRepository.findAll();
+
+        return users.stream().map(user -> user.getUsername()).collect(Collectors.toList());
     }
 }
