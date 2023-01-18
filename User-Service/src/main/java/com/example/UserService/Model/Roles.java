@@ -2,14 +2,14 @@ package com.example.UserService.Model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
+
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
-@ToString
+
+//@ToString
 //@RequiredArgsConstructor
 @Getter
 @Setter
@@ -40,16 +40,5 @@ public class Roles {
 
 }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Roles tag = (Roles) o;
-        return Objects.equals(name, tag.name);
-    }
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }
