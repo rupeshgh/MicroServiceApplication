@@ -30,45 +30,53 @@ public class UserServiceApplication {
 	CommandLineRunner runner(UserService userService, RolesService rolesService){
 		return args -> {
 
-//
-//
-			Roles userRole=new Roles();
-			userRole.setName("ROLE_USER");
 
-			Roles adminRole=new Roles();
-			adminRole.setName("ROLE_ADMIN");
-//
-
-			Roles userRole1=new Roles();
-			userRole1.setName("ROLE_USER");
+			User u1 =new User();
+			u1.setEmail("asdasdadaasdas");
+			u1.setPassword("asdasda");
+			u1.setUsername("uc");
 
 
+			User u2 = new User();
+			u2.setEmail("asdasdadaasdaasdasds");
+			u2.setPassword("asdasdaasdasd");
+			u2.setUsername("uc");
+
+
+			User u3 = new User();
+			u3.setEmail("assds");
+			u3.setPassword("asdasdaasdasd");
+			u3.setUsername("uc");
 
 
 
-			User ub=new User();
-			ub.setEmail("asdasdada");
-			ub.setPassword("asdasda");
-			ub.setUsername("ub");
+			Roles r1 =new Roles("user_role");
+			Roles r2= new Roles("admin_role");
+			Roles r3=new Roles("ok_role");
 
-			ub.addRoles(userRole);
-
-			userService.save(ub);
-//
-//
-//
-			User uc=new User();
-			uc.setEmail("asdasdadaasdas");
-			uc.setPassword("asdasda");
-			uc.setUsername("uc");
-			uc.addRoles(userRole1);
-			userService.save(uc);
-//
-//
-//
-///
+//			u2.setUserRoles(new ArrayList<>());
+			u1.addRoles(r1);
+			u1.addRoles(r2);
 
 
+
+//			u2.setUserRoles(new ArrayList<>());
+			u2.addRoles(r1);
+			u2.addRoles(r3);
+
+			u3.addRoles(r1);
+
+
+
+			r1.addUser(u1);
+			r1.addUser(u2);
+			r2.addUser(u1);
+			r3.addUser(u2);
+			r1.addUser(u3);
+
+
+			userService.save(u1);
+			userService.save(u2);
 
 
 
