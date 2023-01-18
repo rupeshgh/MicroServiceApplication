@@ -5,9 +5,12 @@ import com.example.InventoryService.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class ProductController {
@@ -24,5 +27,15 @@ public class ProductController {
 
             return (ResponseEntity<?>) ResponseEntity.badRequest();
         } else return new ResponseEntity<>(prod, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/getAllProducts")
+    public ResponseEntity<List<Product>> getAllProducts(){
+        List<Product>products=productService.getAllProducts();
+
+        return new ResponseEntity<>(products,HttpStatus.OK);
+
+
     }
 }

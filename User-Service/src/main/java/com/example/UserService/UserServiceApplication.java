@@ -30,25 +30,45 @@ public class UserServiceApplication {
 	CommandLineRunner runner(UserService userService, RolesService rolesService){
 		return args -> {
 
-
-			Set<Roles> UserRole=new HashSet<>();
-			UserRole.add(new Roles(null,"ROLE_USER",null));
 //
-			Set<Roles>MixedRole=new HashSet<>();
-
-			MixedRole.add(new Roles(null,"ROLE_USER",null));
-			MixedRole.add(new Roles(null,"ROLE_ADMIN",null));
 //
-			User u1=new User(null,"xyz1","xyz1@gmail.com","123",MixedRole);
-			userService.save(u1);
+			Roles userRole=new Roles();
+			userRole.setName("ROLE_USER");
 
-			User u2=new User(null,"xyz2","xyz2@gmail.com","123",MixedRole);
-			userService.save(u2);
+			Roles adminRole=new Roles();
+			adminRole.setName("ROLE_ADMIN");
+//
 
-			User u3=new User(null,"xyz3","xyz3@gmail.com","123",MixedRole);
-			userService.save(u3);
-			User u4=new User(null,"xyz4","xyz4@gmail.com","123",MixedRole);
-			userService.save(u4);
+			Roles userRole1=new Roles();
+			userRole1.setName("ROLE_USER");
+
+
+
+
+
+			User ub=new User();
+			ub.setEmail("asdasdada");
+			ub.setPassword("asdasda");
+			ub.setUsername("ub");
+
+			ub.addRoles(userRole);
+
+			userService.save(ub);
+//
+//
+//
+			User uc=new User();
+			uc.setEmail("asdasdadaasdas");
+			uc.setPassword("asdasda");
+			uc.setUsername("uc");
+			uc.addRoles(userRole1);
+			userService.save(uc);
+//
+//
+//
+///
+
+
 
 
 

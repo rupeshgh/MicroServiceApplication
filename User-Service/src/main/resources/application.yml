@@ -3,8 +3,9 @@ server:
 
 spring:
   jpa:
+    show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     database-platform: org.hibernate.dialect.MySQLDialect
   application:
     name: User-Service

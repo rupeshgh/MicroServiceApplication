@@ -1,5 +1,6 @@
 package com.example.UserService.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Integer id;
     private String username;
 
@@ -27,13 +29,19 @@ public class User {
     private String email;
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     @JoinTable(
             name="user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name="role_id")
+
     )
-    private Set<Roles> UserRoles=new HashSet<>();
+    private List<Roles> UserRoles=new ArrayList<>();
 
 
+
+    public void addRoles(Roles roles){
+        UserRoles.add(roles);
+        roles.getUsers().add(this);
+    }
 }
