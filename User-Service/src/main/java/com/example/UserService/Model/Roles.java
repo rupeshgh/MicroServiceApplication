@@ -2,11 +2,8 @@ package com.example.UserService.Model;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashSet;
+import java.util.Set;
 
 
 //@ToString
@@ -26,10 +23,10 @@ public class Roles {
 
     private String name;
 
-    @ManyToMany(mappedBy = "UserRoles",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "UserRoles",fetch = FetchType.EAGER)
     @ToString.Exclude
 
-    private List<User> users=new ArrayList<>();
+    private Set<User> users=new HashSet<>();
 
     public Roles(String ok_role) {
         this.name=ok_role;

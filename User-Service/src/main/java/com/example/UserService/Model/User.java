@@ -6,10 +6,9 @@ import lombok.*;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-
-
-
+import java.util.Set;
 
 
 @Getter
@@ -33,7 +32,7 @@ public class User {
     private String email;
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name="user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -41,13 +40,18 @@ public class User {
 
     )
 
-    private List<Roles> UserRoles=new ArrayList<>();
+    private Set<Roles> UserRoles=new HashSet<>();
 
 
 
     public void addRoles(Roles roles){
-        UserRoles.add(roles);
+        this.UserRoles.add(roles);
 
+    }
+
+    public void removeRoles(Roles role){
+        this.UserRoles.remove(role);
+        role.getUsers().remove(this);
     }
 
 

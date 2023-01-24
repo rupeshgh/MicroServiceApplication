@@ -5,6 +5,8 @@ import com.example.UserService.Repository.RolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class RolesService {
@@ -12,14 +14,15 @@ public class RolesService {
     @Autowired
     RolesRepository rolesRepository;
 
-    public void saveRole(Roles role){
+    public void saveRole(Roles role) {
         rolesRepository.save(role);
 
 
     }
 
-   public Roles getRole(String s){
+    public Roles getRole(String s) {
 
         return rolesRepository.findByName(s);
     }
 }
+
