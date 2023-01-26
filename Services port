@@ -1,0 +1,6 @@
+eureka server: 8900
+api-gateway:8901
+user-service:8902
+product-service:8903
+order-service:8904
+

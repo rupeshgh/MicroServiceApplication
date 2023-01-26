@@ -8,21 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/user-service")
 public class UserController {
 
     @Autowired
     UserService userService;
 
-    @PostMapping("/userservice/register")
+    @PostMapping("/register")
     public ResponseEntity<?> RegisterUser(@RequestBody  User user){
 
         User savedUser=userService.save(user);
@@ -36,9 +33,9 @@ public class UserController {
        }
 
     }
-    @GetMapping("/userservice/getAllUser")
+    @GetMapping("/getAllUser")
     public ResponseEntity<?> getUsers(){
-
+        System.out.println("called");
         List<String> users=userService.getUsers();
 
         return new ResponseEntity<>(users,HttpStatus.OK);

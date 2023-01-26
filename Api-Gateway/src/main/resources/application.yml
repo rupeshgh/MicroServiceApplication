@@ -20,17 +20,26 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: User-Service
-          uri: http://localhost:8092
+        - id: Order-Service
+          uri: http://www.localhost:8904
           predicates:
-            - Path=/userservice/**
+            - Path=/order-service/**
+        - id: Product-Service
+          uri: http://www.localhost:8903
+          predicates:
+            - Path=/product-service/**
+        - id: User-Service
+          uri: http://www.localhost:8902/
+          predicates:
+            - Path=/user-service/**
+
   application:
     name: apiGateway
 
 
 
 server:
-  port: 8091
+  port: 8901
 
 eureka:
   client:
