@@ -9,17 +9,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
+
+
+//Don't name table as order its a reserved keyeword ..will result in syntax error
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Order {
+public class Orders {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private Integer userId;
@@ -27,7 +30,8 @@ public class Order {
 
     private Integer productId;
 
-//    private Instant date;
+
+    private LocalDateTime date;
 
     private Integer quantity;
 

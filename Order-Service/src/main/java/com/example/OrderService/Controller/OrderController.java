@@ -1,12 +1,14 @@
 package com.example.OrderService.Controller;
 
 import com.example.OrderService.ExtrenalClasses.Product;
-import com.example.OrderService.Model.Order;
+
+import com.example.OrderService.Model.Orders;
 import com.example.OrderService.Service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -20,7 +22,9 @@ WebClient.Builder webClientBuilder;
     OrderService orderService;
 
     @PostMapping("/orderItem")
-    public void orderItem(@RequestBody Order order){
+    public void orderItem(@RequestBody Orders order){
+        LocalDateTime date=LocalDateTime.now();
+        order.setDate(date);
         System.out.println("id:"+order.getProductId());
        Product product= webClientBuilder.build().post()
                         .uri("http://www.localhost:8901/product-service/checkProduct/"+order.getProductId())
@@ -30,11 +34,11 @@ WebClient.Builder webClientBuilder;
 
 
         System.out.println("From order Service after webclient call with productname:"+product.getName());
-//        orderService.saveOrder(order);
+        orderService.saveOrder(order);
 
     }
     @GetMapping("/allOrders")
-    public List<Order> allOrders(){
+    public List<Orders> allOrders(){
 
         return orderService.getAllOrders();
     }
