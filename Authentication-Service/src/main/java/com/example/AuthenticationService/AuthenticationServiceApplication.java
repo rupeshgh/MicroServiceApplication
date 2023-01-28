@@ -7,9 +7,11 @@ import com.example.AuthenticationService.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
+@EnableDiscoveryClient
 public class AuthenticationServiceApplication {
 
 	public static void main(String[] args) {
@@ -24,9 +26,9 @@ public class AuthenticationServiceApplication {
 			//Many-to-many bidirectional association
 
 
-			Roles r1 =new Roles("user_role");
-			Roles r2= new Roles("admin_role");
-			Roles r3=new Roles("ok_role");
+			Roles r1 =new Roles("ROLE_USER");
+			Roles r2= new Roles("ROLE_ADMIN");
+			Roles r3= new Roles("ROLE_MANAGER");
 
 			User u1 =new User();
 			u1.setEmail("john@gmail.com");
@@ -47,9 +49,8 @@ public class AuthenticationServiceApplication {
 			u2.setUsername("ben");
 
 			u2.addRoles(r1);
-			u2.addRoles(r3);
+
 			r1.addUser(u2);
-			r3.addUser(u2);
 
 
 
@@ -59,8 +60,8 @@ public class AuthenticationServiceApplication {
 			u3.setPassword("123");
 			u3.setUsername("harry");
 
-			u3.addRoles(r1);
-			r1.addUser(u3);
+			u3.addRoles(r3);
+			r3.addUser(u3);
 
 
 

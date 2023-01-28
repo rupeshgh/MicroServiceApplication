@@ -20,6 +20,10 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: Auth-Service
+          uri: http://www.localhost:8905
+          predicates:
+            - Path=/auth-service/**
         - id: Order-Service
           uri: http://www.localhost:8904
           predicates:

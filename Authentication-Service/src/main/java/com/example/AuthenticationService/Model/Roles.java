@@ -25,7 +25,6 @@ public class Roles {
     private String name;
 
     @ManyToMany(mappedBy = "UserRoles",fetch = FetchType.EAGER)
-    @ToString.Exclude
 
     private Set<User> users=new HashSet<>();
 

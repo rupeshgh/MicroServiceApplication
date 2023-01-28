@@ -1,7 +1,6 @@
-package com.example.AuthenticationService.SecurityConfig;
+package com.example.InventoryService.SecurityConfig;
 
-
-import com.example.AuthenticationService.Jwt.JwtAuthFilter;
+import com.example.InventoryService.Jwt.JwtAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,44 +14,44 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
-@Configuration
 @EnableWebSecurity
+@Configuration
 public class SecurityConfig {
+
+    @Autowired
+    JwtAuthFilter jwtAuthFilter;
+
+
+    @Bean
+    PasswordEncoder passwordEncoder(){
+
+        return NoOpPasswordEncoder.getInstance();
+    }
 
     @Bean
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
-
-    @Autowired
-   JwtAuthFilter jwtAuthFilter;
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-    }
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        return http
-                .csrf().disable()
-                .authorizeHttpRequests()
+        return http.csrf().disable()
 
-                .requestMatchers("/user/ok").hasAuthority("ROLE_USER")
-                .requestMatchers("/auth-service/authenticate").permitAll()
+
+                .authorizeHttpRequests()
+                .requestMatchers("/product-service/**").hasAuthority("ROLE_USER")
 
                 .and()
-                .httpBasic().disable()
-                .formLogin().disable()
-
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
+                .httpBasic().disable()
+                .formLogin()
+                .disable()
+
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
 
-
                 .build();
+
     }
 
 }

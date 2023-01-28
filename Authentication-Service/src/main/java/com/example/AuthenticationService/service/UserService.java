@@ -33,7 +33,7 @@ public class UserService {
 
     public void addRoleToUser(String email, String roleName) {
 
-        User user=userRepository.getUserByEmail(email);
+        User user=userRepository.findByEmail(email);
         Roles role=rolesRepository.getRolesByName(roleName);
 
         user.getUserRoles().add(role);
@@ -80,7 +80,7 @@ public class UserService {
         user.setUsername("chris");
         user.setPassword("asdasdasd");
 
-        Roles role= rolesRepository.getRolesByName("user_role");
+        Roles role= rolesRepository.getRolesByName("ROLE_USER");
 
 
 //         Roles role = new Roles(null,"manager",new HashSet<>());

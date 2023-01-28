@@ -1,7 +1,6 @@
-package com.example.AuthenticationService.SecurityConfig;
+package com.example.OrderService.SecurityConfig;
 
-
-import com.example.AuthenticationService.Jwt.JwtAuthFilter;
+import com.example.OrderService.Jwt.JwtAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,22 +14,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Autowired
+    JwtAuthFilter jwtAuthFilter;
+
     @Bean
-    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    AuthenticationManager authenticationManager (AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
-
-    @Autowired
-   JwtAuthFilter jwtAuthFilter;
-
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    PasswordEncoder passwordEncoder(){
         return NoOpPasswordEncoder.getInstance();
     }
     @Bean
@@ -39,20 +35,13 @@ public class SecurityConfig {
         return http
                 .csrf().disable()
                 .authorizeHttpRequests()
-
-                .requestMatchers("/user/ok").hasAuthority("ROLE_USER")
-                .requestMatchers("/auth-service/authenticate").permitAll()
-
+                .requestMatchers("/order-service/**").permitAll()
                 .and()
                 .httpBasic().disable()
                 .formLogin().disable()
-
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-
-
                 .build();
     }
-
 }

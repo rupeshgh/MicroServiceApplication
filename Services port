@@ -3,4 +3,5 @@ api-gateway:8901
 user-service:8902
 product-service:8903
 order-service:8904
+auth-service:8905
 

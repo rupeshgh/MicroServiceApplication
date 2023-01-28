@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Component
+
 public class CustomUserDetails implements UserDetails {
     private final User user;
 
@@ -22,6 +22,7 @@ public class CustomUserDetails implements UserDetails {
         Collection<SimpleGrantedAuthority>authorities=new ArrayList<>();
 
         this.user.getUserRoles().forEach(roles -> {
+//            System.out.println(roles.getName());
             authorities.add(new SimpleGrantedAuthority(roles.getName()));
         });
         return authorities;

@@ -4,6 +4,7 @@ import com.example.OrderService.ExtrenalClasses.Product;
 
 import com.example.OrderService.Model.Orders;
 import com.example.OrderService.Service.OrderService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -22,12 +23,14 @@ WebClient.Builder webClientBuilder;
     OrderService orderService;
 
     @PostMapping("/orderItem")
-    public void orderItem(@RequestBody Orders order){
+    public void orderItem(@RequestBody Orders order, HttpServletRequest request){
+        String tokenHeader= request.getHeader("Authorization");
         LocalDateTime date=LocalDateTime.now();
         order.setDate(date);
         System.out.println("id:"+order.getProductId());
        Product product= webClientBuilder.build().post()
                         .uri("http://www.localhost:8901/product-service/checkProduct/"+order.getProductId())
+               .header("Authorization",tokenHeader)
                                 .retrieve()
                                         .bodyToMono(Product.class)
                                                 .block();
